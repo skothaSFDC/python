@@ -37,9 +37,37 @@ class Employee:
 class Developer(Employee):
     hikePercentage = 2.5
 
-dev_1 = Developer('Sai','Shetty',100000)
-print(dev_1.pay)
-dev_1.calculate_hike()
-print(dev_1.pay)
+class Manager(Employee):
+    #create a new initializer to accept the Employees
+    def __init__(self,firstName,lastName,pay,employees=None):
+        #just inherir the __init__ of Parent Class
+        super().__init__(firstName,lastName,pay)
+        if employees is None:
+            self.employees = []
+        else:
+            self.employees = employees
 
-#Developer.printEmployInfo('Sai-Sahani-50000')
+    def add_Employee(self,emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+
+    def remove_Employee(self,emp):
+        if emp in self.employees:
+            self.employees.remove(emp)
+
+    def print_Employees(self):
+        for emp in self.employees:
+            print('----->', emp.email)            
+
+
+emp_1 = Employee('Sai','Kotha',30000)
+emp_2 = Employee('Sahani','Reddy',30000)
+
+mgr_1 = Manager('Sahani','Shetty',50000,[emp_1])
+print(mgr_1.firstName)
+print(mgr_1.lastName)
+
+mgr_1.add_Employee(emp_2)
+print(mgr_1.print_Employees())
+
+
